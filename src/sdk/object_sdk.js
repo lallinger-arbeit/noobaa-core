@@ -232,7 +232,7 @@ class ObjectSDK {
                 }
                 if (bucket.namespace.write_resource && _.isEqual(bucket.namespace.read_resources, [bucket.namespace.write_resource])) {
                     return {
-                        ns: this._setup_single_namespace(_.extend({}, bucket.namespace.write_resource,bucket), bucket._id),
+                        ns: this._setup_single_namespace(_.extend({}, bucket.namespace.write_resource, bucket)),
                         bucket,
                         valid_until: time + config.OBJECT_SDK_BUCKET_CACHE_EXPIRY_MS,
                     };
@@ -283,7 +283,9 @@ class ObjectSDK {
         });
     }
 
-    _setup_single_namespace(namespace_resource_config, bucket_id, bucket) {
+    _setup_single_namespace(bucket) {
+        var namespace_resource_config = bucket.namespace.write_resource;
+        var bucket_id = bucket._id;
         const ns_info = namespace_resource_config.resource;
         if (ns_info.endpoint_type === 'NOOBAA') {
             if (ns_info.target_bucket) {

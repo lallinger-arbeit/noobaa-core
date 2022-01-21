@@ -18,7 +18,7 @@ const config = require('../../config');
 class NamespaceS3 {
 
 
-    constructor({ namespace_resource_id, rpc_client, s3_params , active_triggers}) {
+    constructor({ namespace_resource_id, rpc_client, s3_params, active_triggers}) {
         this.namespace_resource_id = namespace_resource_id;
         this.access_key = s3_params.accessKeyId;
         this.endpoint = s3_params.endpoint;
